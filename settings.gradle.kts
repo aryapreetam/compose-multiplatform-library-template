@@ -35,3 +35,4 @@ plugins {
 }
 
 include(":sample:composeApp")
+include(":library")
