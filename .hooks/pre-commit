@@ -1,19 +1,25 @@
 #!/bin/sh
-# Auto format Kotlin files in the staging area
-CHANGED_FILES="$(git --no-pager diff --name-only --cached --diff-filter=ACMRTUXB --relative | grep '\.kt[s"]\?$')"
+# Run Spotless only on staged Kotlin files
+
+CHANGED_FILES="$(git diff --cached --name-only --diff-filter=ACMRTUXB | grep '\.kt[s]\?$')"
+
 if [ -z "$CHANGED_FILES" ]; then
-  echo "No Kotlin staged files."
-else
-  echo "Running ktlint format over these files:"
-  echo "$CHANGED_FILES"
-  if ! (echo "$CHANGED_FILES" | xargs ./tools/ktlint --format --relative); then
-    exit $?
-  else
-    echo "Completed ktlint run."
-    echo "$CHANGED_FILES" | while read -r file; do
-      if [ -f "$file" ]; then
-        git add "$file"
-      fi
-    done
-  fi
+  echo "✅ No Kotlin files staged."
+  exit 0
 fi
+
+echo "🎯 Running Spotless Apply on staged files..."
+
+./gradlew spotlessApply
+
+echo "📦 Re-adding formatted files to Git..."
+
+echo "$CHANGED_FILES" | while read -r file; do
+  if [ -f "$file" ]; then
+    git add "$file"
+  fi
+done
+
+echo "✅ Spotless formatting completed and staged."
+
+exit 0
