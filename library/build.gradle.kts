@@ -21,6 +21,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.vanniktech.mavenPublish)
     alias(libs.plugins.spotless)
+    alias(libs.plugins.dokka)
 }
 
 group = "com.example.mylibrary"

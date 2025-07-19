@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.composeCompiler) apply false
     alias(libs.plugins.kotlinMultiplatform) apply false
     alias(libs.plugins.spotless)
+    alias(libs.plugins.dokka)
 }
 
 tasks.register<Copy>("setUpGitHooks") {

@@ -42,6 +42,7 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
+            binaryOption("bundleId", "com.myapplication")
         }
     }
 
@@ -119,6 +120,10 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    lint {
+        disable += setOf("NullSafeMutableLiveData")
     }
 }
 
