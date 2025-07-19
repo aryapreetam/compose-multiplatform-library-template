@@ -2,8 +2,9 @@ name: Check code style
 on:
   push:
     branches:
-      - main
-      - feature/ci_support
+      - sudo
+#      - main
+#      - feature/ci_support
   pull_request:
 
 jobs:

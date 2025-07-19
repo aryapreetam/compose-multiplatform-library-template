@@ -2,7 +2,8 @@ name: Publish Wiki
 on:
   push:
     branches:
-      - main
+      - sudo
+#      - main
     paths-ignore:
       - sample
 
