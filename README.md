@@ -1,134 +1,147 @@
 [![official project](http://jb.gg/badges/official.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Build Multiplatform project](https://github.com/KevinnZou/compose-multiplatform-library-template/actions/workflows/build.yml/badge.svg)](https://github.com/KevinnZou/compose-multiplatform-library-template/actions/workflows/build.yml)
+[![Build Multiplatform project](https://github.com/KevinnZou/compose-multiplatform-library-template/actions/workflows/build.yml/badge.svg)](https://github.com/meticha/compose-multiplatform-library-template/actions/workflows/build.yml)
 [![Publish Wiki](https://github.com/KevinnZou/compose-multiplatform-library-template/actions/workflows/wiki.yml/badge.svg)](https://github.com/KevinnZou/compose-multiplatform-library-template/actions/workflows/wiki.yml)
+
 # [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform) Library
 
-This is a template for a [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform#readme) **library** targeting desktop,
-Android, and iOS. It is built on top of the [Compose Multiplatform Template](https://github.com/JetBrains/compose-multiplatform-template)
+This is a template for a [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform#readme) **library**
+targeting desktop,
+Android, and iOS. It is built on top of
+the [Compose Multiplatform Template](https://github.com/JetBrains/compose-multiplatform-template)
 and contains the following changes:
-* Add a `lib` module for the shared library code.
+
+* Add a `library` module for the shared library code.
 * Move the androidApp, desktopApp, and iosApp modules to the `samples` folder.
 * Apply the `org.jetbrains.dokka` plugin to generate documentation for the library code.
 * Apply the `com.vanniktech.maven.publish` plugin to streamline the process of publishing a library.
-* Apply the `org.jlleitschuh.gradle.ktlint` plugin to enforce the code style and set up the git hooks to fix the code style before committing automatically.
+* Apply the `org.jlleitschuh.gradle.ktlint` plugin to enforce the code style and set up the git hooks to fix the code
+  style before committing automatically.
+* Added sample `CODE_OF_CONDUCT` and `CONTRIBUTING` files
+* Apply the `com.diffplug.spotless` for formatting your code and adding license files
 * Set up the CI pipeline to build the project, check the code style, and publish the documentation.
 
 ## Maven Publish
+
 This template applies the `com.vanniktech.maven.publish` plugin to streamline the process of publishing a library.
 
 ### Configuring
-To publish your library properly, you need to configure the necessary information in `mavenPublishing` block in `build.gradle.kts`
+
+To publish your library properly, you need to configure the necessary information in `mavenPublishing` block in
+`build.gradle.kts`
+
 ```kotlin
 mavenPublishing {
-    // publishToMavenCentral(SonatypeHost.DEFAULT)
-    // or when publishing to https://s01.oss.sonatype.org
-    publishToMavenCentral(SonatypeHost.S01, automaticRelease = true)
+    publishToMavenCentral()
+
     signAllPublications()
-    coordinates("com.example.mylibrary", "mylibrary-runtime", "1.0.0")
+
+    coordinates(group.toString(), "library", version.toString())
 
     pom {
-        name.set(project.name)
-        description.set("A description of what my library does.")
-        inceptionYear.set("2023")
-        url.set("https://github.com/username/mylibrary/")
+        name = "Library Name"
+        description = "Library Description"
+        inceptionYear = "2025"
+        url = "https://github.com/username/mylibrary/"
         licenses {
             license {
-                name.set("The Apache License, Version 2.0")
-                url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-                distribution.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                name = "Apache License"
+                url = "https://opensource.org/license/apache-2-0"
             }
         }
         developers {
             developer {
-                id.set("username")
-                name.set("User Name")
-                url.set("https://github.com/username/")
+                id = "Developer ID"
+                name = "Developer Name"
+                url = "Develper GitHub URL"
+                email = "Developer Email"
             }
         }
         scm {
-            url.set("https://github.com/username/mylibrary/")
-            connection.set("scm:git:git://github.com/username/mylibrary.git")
-            developerConnection.set("scm:git:ssh://git@github.com/username/mylibrary.git")
+            url = "Library GitHub URL"
+            connection = "scm:git:git://github.com/username/mylibrary.git"
+            developerConnection = "scm:git:ssh://git@github.com/username/mylibrary.git"
         }
     }
 }
 ```
 
 ### Secrets
-For the publishing to work the credentials for Sonatype OSS as well as for the GPG key that is used for signing need to provided. To keep them out of version control it is recommended to either put this into the gradle.properties file user home or to use environment variables for publishing from CI servers.
+
+For the publishing to work, the credentials for Sonatype OSS as well as for the GPG key that is used for signing need to
+be provided. To keep them out of version control, it is recommended to either put this into the gradle.properties file
+user home or to use environment variables for publishing from CI servers.
+
 ```kotlin
-mavenCentralUsername=username
-mavenCentralPassword=the_password
+mavenCentralUsername = username
+mavenCentralPassword = the_password
 
-signing.keyId=12345678
-signing.password=some_password
-signing.secretKeyRingFile=/Users/yourusername/.gnupg/secring.gpg
+signing.keyId = 12345678
+signing.password = some_password
+signing.secretKeyRingFile = `/Users/yourusername/.gnupg/secring.gpg`
 ```
 
-Please visit https://vanniktech.github.io/gradle-maven-publish-plugin/central/#configuring-maven-central for detailed instructions.
+Please visit https://vanniktech.github.io/gradle-maven-publish-plugin/central/#configuring-maven-central for detailed
+instructions.
 
-## KtLint
+## Spotless
 
-This template applies the `org.jlleitschuh.gradle.ktlint` plugin to enforce the code style.
-To check the code style, run the following command:
-```shell
-./gradlew ktlintCheck
-```
+This template applies the `com.diffplug.spotless` plugin to format the code.
+
 To automatically fix the code style, run the following command:
+
 ```shell
-./gradlew ktlintFormat
+./gradlew spotlessApply
 ```
 
-This template also setup the git hooks to fix the code style before committing automatically.
+This template also sets up the git hooks to fix the code style before committing automatically.
 To install the git hooks, run the following command:
+
 ```shell
 ./gradlew setUpGitHooks
 ```
+
 Then you can commit the code without worrying about the code style.
 
 ## Dokka
 
 This template applies the `org.jetbrains.dokka` plugin to generate documentation for the library code.
 To generate the documentation, run the following command:
+
 ```shell
 ./gradlew dokkaHtmlMultiModule
 ```
+
 The documentation will be generated in the `build/dokka/htmlMultiModule` folder.
 
 ## CI/CD
+
 This template uses GitHub Actions to set up a CI/CD pipeline.
 Currently, the pipeline is configured to do three things:
 
 ### Build the project
+
 The pipeline is triggered on every push to the `main` branch or on every pull request.
 It builds the project and runs the tests.
 
-The pipeline is defined in [`.github/workflows/build.yml`](https://github.com/KevinnZou/compose-multiplatform-library-template/blob/feature/ci_support/.github/workflows/build.yml).
+The pipeline is defined in [
+`.github/workflows/build.yml`](https://github.com/KevinnZou/compose-multiplatform-library-template/blob/feature/ci_support/.github/workflows/build.yml).
 
 ### Check the code style
+
 The pipeline is triggered on every push to the `main` branch or on every pull request.
 It checks the code style and fails if the code style is not correct.
 
-The pipeline is defined in [`.github/workflows/code_style.yml`](https://github.com/KevinnZou/compose-multiplatform-library-template/blob/feature/ci_support/.github/workflows/code_style.yml).
-
-If the code style is not correct, you can run the following command to fix it:
-```shell
-./gradlew ktlintFormat
-```
+The pipeline is defined in `.github/workflows/code_style.yml`
 
 ### Publish the documentation
+
 The pipeline is triggered on every push to the `main` branch or on every pull request.
 It generates the documentation and publishes it to GitHub Pages.
 
-The pipeline is defined in [`.github/workflows/wiki.yml`](https://github.com/KevinnZou/compose-multiplatform-library-template/blob/feature/ci_support/.github/workflows/wiki.yml).
+The pipeline is defined in `.github/workflows/wiki.yml`
 
 ## Set up the environment
-
-> **Note**
-> The iOS part of Compose Multiplatform is in Alpha. It may change incompatibly and require manual migration in the
-> future.
-> If you have any issues, please report them on [GitHub](https://github.com/JetBrains/compose-multiplatform/issues).
 
 You can use this template to start developing your
 own [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform#readme) library targeting desktop,
@@ -149,7 +162,7 @@ To work with this template, you need the following:
 * A machine running a recent version of macOS
 * [Xcode](https://apps.apple.com/us/app/xcode/id497799835)
 * [Android Studio](https://developer.android.com/studio)
-* The [Kotlin Multiplatform Mobile plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform-mobile)
+* The [Kotlin Multiplatform Plugin](https://plugins.jetbrains.com/plugin/14936-kotlin-multiplatform)
 
 ### Check your environment
 
@@ -192,18 +205,7 @@ belonging to the project:
 
 <img src="readme_images/open_project_view.png" height="300px">
 
-Your Compose Multiplatform project includes 4 modules:
-
-### `shared`
-
-This is a Kotlin module that contains the logic common for desktop, Android, and iOS applications, that is, the code you
-share between platforms.
-
-This `shared` module is also where you'll write your Compose Multiplatform code.
-In `shared/src/commonMain/kotlin/App.kt`, you can find the shared root `@Composable` function for your app.
-
-It uses Gradle as the build system. You can add dependencies and change settings in `shared/build.gradle.kts`.
-The `shared` module builds into a Java library, an Android library, and an iOS framework.
+Your Compose Multiplatform project includes 3 modules:
 
 ### `desktopApp`
 
@@ -224,7 +226,8 @@ It depends on and uses the `shared` module as a CocoaPods dependency.
 
 ### On desktop
 
-To run your desktop application in Android Studio, select `desktopApp` in the list of run configurations and click **Run**:
+To run your desktop application in Android Studio, select `desktopApp` in the list of run configurations and click **Run
+**:
 
 <img src="readme_images/run_on_desktop.png" height="60px"><br />
 
@@ -342,7 +345,8 @@ the same time:
 1. In Android Studio, navigate to the `shared/src/commonMain/kotlin/App.kt` file.
    This is the common entry point for your Compose Multiplatform app.
 
-   Here, you see the code responsible for rendering the "Hello, World!" button and the animated Compose Multiplatform logo:
+   Here, you see the code responsible for rendering the "Hello, World!" button and the animated Compose Multiplatform
+   logo:
 
    ```kotlin
    @OptIn(ExperimentalResourceApi::class)
@@ -404,13 +408,16 @@ the same time:
 
 ## How to configure the iOS application
 
-To get a better understanding of this template's setup and learn how to configure the basic properties of your iOS app without Xcode,
+To get a better understanding of this template's setup and learn how to configure the basic properties of your iOS app
+without Xcode,
 open the `iosApp/Configuration/Config.xcconfig` file in Android Studio. The configuration file contains:
 
 * `APP_NAME`, a target executable and an application bundle name.
 * `BUNDLE_ID`,
   which [uniquely identifies the app throughout the system](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleidentifier#discussion).
-* `TEAM_ID`, [a unique identifier generated by Apple that's assigned to your team](https://developer.apple.com/help/account/manage-your-team/locate-your-team-id/#:~:text=A%20Team%20ID%20is%20a,developer%20in%20App%20Store%20Connect).
+*
+
+`TEAM_ID`, [a unique identifier generated by Apple that's assigned to your team](https://developer.apple.com/help/account/manage-your-team/locate-your-team-id/#:~:text=A%20Team%20ID%20is%20a,developer%20in%20App%20Store%20Connect).
 
 To configure the `APP_NAME` option, open `Config.xcconfig` in any text editor *before opening* the project in Android
 Studio, and then set the desired name.
