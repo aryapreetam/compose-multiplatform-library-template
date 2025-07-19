@@ -1,3 +1,3 @@
 actual fun getPlatformName(): String {
-    return "Native"
+    return "Linux"
 }
