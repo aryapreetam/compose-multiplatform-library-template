@@ -4,4 +4,6 @@ root = true
 ktlint_standard_filename = disabled
 ktlint_standard_no-wildcard-imports = disabled
 ktlint_standard_function-naming = disabled
-ktlint_function_naming_ignore_when_annotated_with=Composable
+ktlint_function_naming_ignore_when_annotated_with=Composable, Test
+compose_allowed_composition_locals = LocalAppColors,LocalAppTypography
+ktlint_compose_modifier-missing-check = disabled
