@@ -67,7 +67,7 @@ spotless {
     kotlin {
         target("**/*.kt")
         targetExclude("**/build/**/*.kt")
-        licenseHeaderFile(rootProject.file("$rootDir/spotless/copyright.kt"),"^")
+        licenseHeaderFile(rootProject.file("$rootDir/spotless/copyright.kt"), "^")
         ktlint("1.7.0")
             .setEditorConfigPath(rootProject.file(".editorconfig"))
     }
@@ -82,6 +82,12 @@ spotless {
         targetExclude("**/build/**/*.xml")
         // Look for the first XML tag that isn't a comment (<!--) or the xml declaration (<?xml)
         licenseHeaderFile(rootProject.file("spotless/copyright.xml"), "(<[^!?])")
+    }
+}
+
+dokka {
+    dokkaPublications.html {
+        outputDirectory.set(layout.buildDirectory.dir("dokka"))
     }
 }
 
