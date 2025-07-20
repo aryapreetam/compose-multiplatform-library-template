@@ -1,13 +1,22 @@
-[![official project](http://jb.gg/badges/official.svg)](https://confluence.jetbrains.com/display/ALL/JetBrains+on+GitHub)
-[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Build Multiplatform project](https://github.com/KevinnZou/compose-multiplatform-library-template/actions/workflows/build.yml/badge.svg)](https://github.com/meticha/compose-multiplatform-library-template/actions/workflows/build.yml)
-[![Publish Wiki](https://github.com/KevinnZou/compose-multiplatform-library-template/actions/workflows/wiki.yml/badge.svg)](https://github.com/KevinnZou/compose-multiplatform-library-template/actions/workflows/wiki.yml)
+# Compose Multiplatform Library Template
 
-# [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform) Library
+![compose-multiplatform-library-template-banner.jpg](banner/compose-multiplatform-library-template-banner.jpg)
+
+<p align="center">
+  <a href="https://opensource.org/licenses/Apache-2.0">
+    <img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/>
+  </a>
+  <img src="http://jb.gg/badges/official.svg" alt="Official JetBrains project">
+  <img src="https://img.shields.io/badge/Jetpack%20Compose-Supported-4285F4?logo=android" alt="Jetpack Compose Supported">
+  <img src="https://img.shields.io/badge/Kotlin-2.1.21-blueviolet?logo=kotlin" alt="Kotlin Version">
+  <a href="https://github.com/meticha/compose-multiplatform-library-template/stargazers">
+    <img src="https://img.shields.io/github/stars/Meticha/compose-multiplatform-library-template.svg?style=social" alt="GitHub stars">
+  </a>
+
+</p>
 
 This is a template for a [Compose Multiplatform](https://github.com/JetBrains/compose-multiplatform#readme) **library**
-targeting desktop,
-Android, and iOS. It is built on top of
+targeting desktop, Android, and iOS. It is built on top of
 the [Compose Multiplatform Template](https://github.com/JetBrains/compose-multiplatform-template)
 and contains the following changes:
 
@@ -109,23 +118,22 @@ This template applies the `org.jetbrains.dokka` plugin to generate documentation
 To generate the documentation, run the following command:
 
 ```shell
-./gradlew dokkaHtmlMultiModule
+./gradlew library:dokkaGeneratePublicationHtml
 ```
 
-The documentation will be generated in the `build/dokka/htmlMultiModule` folder.
+The documentation will be generated in the `library/build/dokka/` folder.
 
 ## CI/CD
 
 This template uses GitHub Actions to set up a CI/CD pipeline.
 Currently, the pipeline is configured to do three things:
 
-### Build the project
+### Publish the project
 
-The pipeline is triggered on every push to the `main` branch or on every pull request.
-It builds the project and runs the tests.
+The pipeline is triggered on every release. It builds the project and publishes to Maven Central.
 
 The pipeline is defined in [
-`.github/workflows/build.yml`](https://github.com/KevinnZou/compose-multiplatform-library-template/blob/feature/ci_support/.github/workflows/build.yml).
+.github/workflows/publish.yml`
 
 ### Check the code style
 
@@ -440,3 +448,8 @@ We encourage you to explore Compose Multiplatform further and try out more proje
 * [Create an application targeting Windows, macOS, and Linux with Compose Multiplatform for Desktop](https://github.com/JetBrains/compose-multiplatform-desktop-template#readme)
 * [Complete more Compose Multiplatform tutorials](https://github.com/JetBrains/compose-multiplatform/blob/master/tutorials/README.md)
 * [Explore some more advanced Compose Multiplatform example projects](https://github.com/JetBrains/compose-multiplatform/blob/master/examples/README.md)
+* [Publish library to Maven Central](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-publish-libraries.html)
+
+## 🔍 Looking for more? 
+Check out other open-source projects by [Meticha](https://www.github.com/meticha) focused on
+productivity, simplicity, and speed.
