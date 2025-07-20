@@ -27,6 +27,7 @@ and contains the following changes:
 * Apply the `org.jlleitschuh.gradle.ktlint` plugin to enforce the code style and set up the git hooks to fix the code
   style before committing automatically.
 * Added sample `CODE_OF_CONDUCT` and `CONTRIBUTING` files
+* Added a sample pull request template and Code owners template
 * Apply the `com.diffplug.spotless` for formatting your code and adding license files
 * Set up the CI pipeline to build the project, check the code style, and publish the documentation.
 
@@ -450,6 +451,7 @@ We encourage you to explore Compose Multiplatform further and try out more proje
 * [Explore some more advanced Compose Multiplatform example projects](https://github.com/JetBrains/compose-multiplatform/blob/master/examples/README.md)
 * [Publish library to Maven Central](https://www.jetbrains.com/help/kotlin-multiplatform-dev/multiplatform-publish-libraries.html)
 
-## 🔍 Looking for more? 
+## 🔍 Looking for more?
+
 Check out other open-source projects by [Meticha](https://www.github.com/meticha) focused on
 productivity, simplicity, and speed.
