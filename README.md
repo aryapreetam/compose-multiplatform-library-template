@@ -6,7 +6,6 @@
   <a href="https://opensource.org/licenses/Apache-2.0">
     <img alt="License" src="https://img.shields.io/badge/License-Apache%202.0-blue.svg"/>
   </a>
-  <img src="http://jb.gg/badges/official.svg" alt="Official JetBrains project">
   <img src="https://img.shields.io/badge/Jetpack%20Compose-Supported-4285F4?logo=android" alt="Jetpack Compose Supported">
   <img src="https://img.shields.io/badge/Kotlin-2.1.21-blueviolet?logo=kotlin" alt="Kotlin Version">
   <a href="https://github.com/meticha/compose-multiplatform-library-template/stargazers">
