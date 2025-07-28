@@ -41,6 +41,10 @@ kotlin {
     iosArm64()
     iosSimulatorArm64()
     linuxX64()
+    wasmJs {
+        browser()
+        binaries.executable()
+    }
 
     sourceSets {
         val commonTest by getting {

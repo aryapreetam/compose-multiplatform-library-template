@@ -48,6 +48,12 @@ kotlin {
 
     jvm("desktop")
 
+    wasmJs {
+        moduleName = "composeApp"
+        binaries.executable()
+        browser()
+    }
+
     sourceSets {
         val desktopMain by getting
 
